@@ -7,10 +7,8 @@ Below are some instructions for retrieving the sample data. We can generate more
 3. Temperature of top and bottom plates. Set to +0.5 and -0.5 for the example dataset.
 
 ### Retrieving Sample Data
-Download the sample simulation data file (~700 MB) from the server
-```bash
-bash download_data.sh
-```
+
+运行simulation生成数据，放到`./experiments/rb2d/data`文件夹下
 
 ### (Alternatively) Generate new simulation data
 Please refer to the Readme page on in the [simulation folder](../../simulation/2d_rayleigh_benard) to generate new data with a different simulation setup.
@@ -39,8 +37,8 @@ Below is a description of the variables in this file:
 - bz: the z derivative of b, shape (200, 512, 128)
 - uz: the z derivative of u, shape (200, 512, 128)
 - wz: the z derivative of w, shape (200, 512, 128)
-- write_number: the sequence index of the simulation frames
-- sim_time: simulation time.
+- write_number: the sequence index of the simulation frames, shape (200, )
+- sim_time: simulation time, shape (200, ).
 
 ## Training
 Training is as simple as running the training script. Before training, make sure to mask out the GPU that you want to use.
@@ -63,7 +61,7 @@ The more important arguments are `--alpha_reg` and `--alpha_pde`, which controls
 
 In order to train the models for the results presented in the paper, you can run 
 ```bash 
-bash run_experiments.sh
+bash run_experiment.sh
 ```
 However, you should have created the corresponding datasets for each experiment from the simulation panel. Refer to the comments in the "run_experiments.sh" script as well.
 

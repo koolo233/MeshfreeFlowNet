@@ -188,7 +188,7 @@ class UNet3d(nn.Module):  # pylint: disable=too-many-instance-attributes
     @staticmethod
     def _get_pool_kernel_size(prev_layer_dims):
         if np.all(prev_layer_dims == np.min(prev_layer_dims)):
-            next_layer_dims = (prev_layer_dims/2).astype(np.int)
+            next_layer_dims = (prev_layer_dims/2).astype(np.int32)
             pool_kernel_size = [2, 2, 2]
         else:
             min_dim = np.min(prev_layer_dims)
@@ -316,7 +316,7 @@ class Encoder3d(nn.Module):  # pylint: disable=too-many-instance-attributes
     @staticmethod
     def _get_pool_kernel_size(prev_layer_dims):
         if np.all(prev_layer_dims == np.min(prev_layer_dims)):
-            next_layer_dims = (prev_layer_dims/2).astype(np.int)
+            next_layer_dims = (prev_layer_dims/2).astype(np.int32)
             pool_kernel_size = [2, 2, 2]
         else:
             min_dim = np.min(prev_layer_dims)

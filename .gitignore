@@ -133,4 +133,6 @@ dmypy.json
 simulation/2d_rayleigh_benard/snapshots/
 *.npz
 
+experiments/rb2d/log/
+
 .idea/
