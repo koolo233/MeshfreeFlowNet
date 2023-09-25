@@ -94,7 +94,7 @@ def frames_to_video(frames_pattern, save_video_to, frame_rate=10, keep_frames=Fa
         shutil.rmtree(frames_dir)
 
 
-def calculate_flow_stats(pred, hres, visc=0.0001):
+def calculate_flow_stats(args, pred, hres, visc=0.0001):
     data = pred
     uw = np.transpose(data[2:4,:,:,1:1+args.eval_zres], (1, 0, 2, 3))
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -143,7 +143,7 @@ def export_video(args, res_dict, hres, lres, dataset):
         lres = dataset.denormalize_grid(lres.copy())
         pred = np.stack([res_dict[key] for key in phys_channels], axis=0)
         pred = dataset.denormalize_grid(pred)
-        calculate_flow_stats(pred, hres)       # Warning: only works with pytorch > v1.3 and CUDA >= v10.1
+        calculate_flow_stats(args, pred, hres)       # Warning: only works with pytorch > v1.3 and CUDA >= v10.1
         # np.savez_compressed(args.save_path+'highres_lowres_pred', hres=lres, lres=lres, pred=pred)
 
     os.makedirs(args.save_path, exist_ok=True)
