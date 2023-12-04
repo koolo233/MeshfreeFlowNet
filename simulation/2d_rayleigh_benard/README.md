@@ -1,3 +1,33 @@
+## 使用描述
+
+### 安装环境
+
+```bash
+conda create -n dedalus
+conda activate dedalus
+
+# install DedalusV2
+## from conda
+conda env config vars set OMP_NUM_THREADS=1
+conda env config vars set NUMEXPR_MAX_THREADS=1
+conda install -c conda-forge dedalus c-compiler "h5py=*=mpi*" "cython<3.0"
+## or from repo
+CC=mpicc pip3 install --no-cache http://github.com/dedalusproject/dedalus/zipball/v2_master/
+```
+
+### 生成数据
+```bash
+# Check the arguments / simulation parameters.
+python rayleigh_benard.py -h
+# Run with 4 mpi processes (additional flags can be added to change simulation params.)
+mpiexec -n 4 python3 rayleigh_benard.py
+# Merge processes
+python -m dedalus merge_procs snapshots
+# Convert into npz file to be consumed by the machine learning pipeline
+python convert_to_npz.py -f 'snapshots/snapshots_s*.h5' -o 'rb2d_ra1e6_s42.npz'
+```
+
+
 ## Dedalus Installation Instructions
 
 需要安装[DedalusV2](https://dedalus-project.readthedocs.io/en/v2_master/pages/installation.html#installing-the-dedalus-package)，V3有较大变化

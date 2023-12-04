@@ -1,5 +1,24 @@
 ## Rayleigh-Bernard 2D Experiment
 
+## 准备数据
+
+运行simulation生成数据，放到`./experiments/rb2d/data`文件夹下
+
+## 运行训练程序
+
+```bash
+# train with train.py
+CUDA_VISIBLE_DEVICES=0,1 python train.py
+# or
+bash run_experiment.sh 0
+```
+
+## 运行testing程序
+
+```bash
+python evaluation.py --eval_dataset='YOUR_EVAL_DATASET' --lres_filter='none' --ckpt='YOUR_CHECKPOINT_DIR/checkpoint_latest.pth.tar_pdenet_best.pth.tar' --save_path='YOUR_LOG_PATH_TO_SAVE_THE_EVAL_RESULTS/' --rayleigh="DATASET's CORRESPONDING RAYLEIGH" --prandtl="DATASET's CORRESPONDING PRANDTL"
+```
+
 ## Dataset
 Below are some instructions for retrieving the sample data. We can generate more data by varying any of the below parameters:
 1. Random seed for the initial perturbation. Set to 42 for the example dataset. At a different random seed the solver will produce results simulated under the same set of physics, but different realisations of the same set of equation given different intial perturbations.
